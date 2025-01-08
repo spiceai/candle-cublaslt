@@ -15,4 +15,4 @@ cudarc = { git = "https://github.com/coreylowman/cudarc", rev = "d3405fa5ce18068
 
 [features]
 default = []
-static-linking = ["cudarc/static-linking"]
+dynamic-linking = ["cudarc/dynamic-linking"]
