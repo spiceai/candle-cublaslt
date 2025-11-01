@@ -11,7 +11,7 @@ cudarc = { version = "0.12.2", default-features = false, features = [ "cublaslt"
 half = { version = "2.3.1", features = ["num-traits"] }
 
 [patch.crates-io]
-cudarc = { git = "https://github.com/EricLBuehler/cudarc", rev = "f6e5bf51153d40e34eb1262b98895ac1235b6422", default-features = false, features = [ "cublaslt", "f16" ]}
+cudarc = { git = "https://github.com/EricLBuehler/cudarc", rev = "34834440ada40a7c53d46d45b65d5e42c5f5d903", default-features = false, features = [ "cublaslt", "f16" ]}
 
 [features]
 default = []
