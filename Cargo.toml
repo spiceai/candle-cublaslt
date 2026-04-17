@@ -6,13 +6,27 @@ edition = "2021"
 description = "CUBLASLt gemm for the candle ML framework."
 
 [dependencies]
-candle = { version = "*", package = "candle-core", features = ["cuda"]}
-cudarc = { version = "0.17.6", default-features = false, features = [ "cublaslt", "f16" ]}
+# Depend on candle-core by its canonical name (renamed to `candle` in code)
+# so the workspace's [patch.crates-io] override for `candle-core` applies.
+# Previously this dep was declared as `candle = { version = "*", package = "candle-core" }`
+# which silently resolved to a different `candle-core` version than the rest of
+# the dep graph (0.8.4 vs 0.10.1), causing `CudaSlice` / `CudaView` to be
+# distinct types between this crate and candle, which broke the `DevicePtr`
+# trait bounds in `cudarc::cublaslt::Matmul::matmul`.
+candle = { version = "=0.10.1", package = "candle-core", features = ["cuda"] }
+cudarc = { version = "0.19", default-features = false, features = [
+    "std",
+    "cublas",
+    "cublaslt",
+    "curand",
+    "driver",
+    "nvrtc",
+    "f16",
+    "f8",
+    "cuda-version-from-build-system",
+    "dynamic-linking",
+] }
 half = { version = "2.3.1", features = ["num-traits"] }
-
-[patch.crates-io]
-cudarc = { git = "https://github.com/EricLBuehler/cudarc", rev = "34834440ada40a7c53d46d45b65d5e42c5f5d903", default-features = false, features = [ "cublaslt", "f16" ]}
 
 [features]
 default = []
-dynamic-linking = ["cudarc/dynamic-linking"]
