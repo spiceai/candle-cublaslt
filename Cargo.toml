@@ -13,7 +13,7 @@ description = "CUBLASLt gemm for the candle ML framework."
 # the dep graph (0.8.4 vs 0.10.1), causing `CudaSlice` / `CudaView` to be
 # distinct types between this crate and candle, which broke the `DevicePtr`
 # trait bounds in `cudarc::cublaslt::Matmul::matmul`.
-candle = { version = "=0.10.1", package = "candle-core", features = ["cuda"] }
+candle = { version = "0.11", package = "candle-core", features = ["cuda"] }
 cudarc = { version = "0.19", default-features = false, features = [
     "std",
     "cublas",
